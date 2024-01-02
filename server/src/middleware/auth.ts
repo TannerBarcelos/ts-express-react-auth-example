@@ -1,7 +1,6 @@
-// middleware/auth.ts
 import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
-import { JWT_SECRET } from '../config'
+import { JWT_SECRET } from '@config'
 
 export function authenticateToken(
   req: Request,
@@ -9,7 +8,7 @@ export function authenticateToken(
   next: NextFunction,
 ) {
   const authHeader = req.headers['authorization']
-  const token = authHeader && authHeader.split(' ')[1]
+  const token = authHeader && authHeader.split(' ')[1] // Bearer <token>
 
   if (!token) {
     return res.sendStatus(401)

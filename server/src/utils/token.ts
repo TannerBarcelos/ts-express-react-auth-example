@@ -3,7 +3,7 @@ import {
   JWT_SECRET,
   ACCESS_TOKEN_EXPIRATION,
   REFRESH_TOKEN_EXPIRATION,
-} from '../config'
+} from '@config'
 
 export function generateAccessToken(user: any) {
   return jwt.sign(user, JWT_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRATION })
