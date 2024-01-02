@@ -1,6 +1,8 @@
 // routes/auth.ts
 import express, { Request, Response } from 'express'
 import { generateAccessToken, generateRefreshToken } from '../utils/token'
+import jwt from 'jsonwebtoken'
+import { JWT_SECRET } from '../config'
 
 const router = express.Router()
 
