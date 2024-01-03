@@ -1,10 +1,11 @@
 import { Request, Response, Router as AuthRouter } from 'express'
 import { JwtTokenUtils } from '../utils/token'
 import { REFRESH_TOKEN_EXPIRATION } from '../config'
+import type { User } from '../lib/definitions'
 
 const authRouter = AuthRouter()
 
-authRouter.post('/login', (req: Request, res: Response) => {
+authRouter.post('/login', (req: Request<{}, {}, User>, res: Response) => {
   const user = req.body
 
   if (!user) {

@@ -1,13 +1,18 @@
 import { Request, Response, NextFunction } from 'express'
 import { JwtTokenUtils } from '../utils/token'
 
+function parseTokenFromHeader(req: Request) {
+  const authorizationHeader = req.headers.authorization
+  const token = authorizationHeader?.split(' ')[1]
+  return token
+}
+
 export function authenticateToken(
   req: Request,
   res: Response,
   next: NextFunction,
 ) {
-  const authHeader = req.headers['authorization']
-  const token = authHeader && authHeader.split(' ')[1] // Bearer <token>
+  const token = parseTokenFromHeader(req)
 
   if (!token) {
     return res.sendStatus(401)
@@ -17,10 +22,7 @@ export function authenticateToken(
     if (err) {
       return res.sendStatus(403)
     }
-
-    // @ts-ignore
     req.user = user
-
     next()
   })
 }
