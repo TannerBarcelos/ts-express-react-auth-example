@@ -1,9 +1,9 @@
-import express, { Request, Response } from 'express'
+import { Request, Response, Router as ProtectedRouter } from 'express'
 
-const router = express.Router()
+const protectedRouter = ProtectedRouter()
 
-router.get('/protected-resource', (req: Request, res: Response) => {
+protectedRouter.get('/protected-resource', (req: Request, res: Response) => {
   res.json({ message: 'This is a protected resource.' })
 })
 
-export default router
+export default protectedRouter

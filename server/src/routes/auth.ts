@@ -1,5 +1,6 @@
 import { Request, Response, Router as AuthRouter } from 'express'
 import { JwtTokenUtils } from '../utils/token'
+import { REFRESH_TOKEN_EXPIRATION } from '../config'
 
 const authRouter = AuthRouter()
 
@@ -11,7 +12,9 @@ authRouter.post('/login', (req: Request, res: Response) => {
   }
 
   const accessToken = JwtTokenUtils.generate(user)
-  const refreshToken = JwtTokenUtils.generate(user, { expiresIn: '1h' })
+  const refreshToken = JwtTokenUtils.generate(user, {
+    expiresIn: REFRESH_TOKEN_EXPIRATION,
+  })
 
   // Store refreshToken securely, e.g., in a cookie or database
   res.cookie('refreshToken', refreshToken, { httpOnly: true })

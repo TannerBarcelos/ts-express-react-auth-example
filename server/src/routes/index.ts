@@ -1,15 +1,15 @@
-import { Router } from 'express'
+import { Router as RootRouter } from 'express'
 import authRoutes from './auth'
 import protectedRoutes from './protected'
 import { authenticateToken as authCheck } from '../middleware/auth'
 
-const router = Router()
+const rootRouter = RootRouter()
 
-router.get('/ping', (req, res) => {
+rootRouter.get('/ping', (req, res) => {
   res.send('Hello World!')
 })
 
-router.use('/auth', authRoutes)
-router.use('/protected', authCheck, protectedRoutes)
+rootRouter.use('/auth', authRoutes)
+rootRouter.use('/protected', authCheck, protectedRoutes)
 
-export default router
+export default rootRouter
