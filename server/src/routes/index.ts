@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import authRoutes from './auth'
 import protectedRoutes from './protected'
-import { authenticateToken as authCheck } from '@/middleware/auth'
+import { authenticateToken as authCheck } from '../middleware/auth'
 
 const router = Router()
 

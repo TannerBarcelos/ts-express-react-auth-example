@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import jwt from 'jsonwebtoken'
-import { JWT_SECRET } from '@config'
+import { JwtTokenUtils } from '../utils/token'
 
 export function authenticateToken(
   req: Request,
@@ -14,12 +13,14 @@ export function authenticateToken(
     return res.sendStatus(401)
   }
 
-  jwt.verify(token, JWT_SECRET, (err: any, user: any) => {
+  JwtTokenUtils.verify(token, (err: any, user: any) => {
     if (err) {
-      return res.sendStatus(403) // Forbidden
+      return res.sendStatus(403)
     }
-    //@ts-ignore
+
+    // @ts-ignore
     req.user = user
+
     next()
   })
 }

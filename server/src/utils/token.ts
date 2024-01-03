@@ -1,14 +1,14 @@
 import jwt from 'jsonwebtoken'
-import {
-  JWT_SECRET,
-  ACCESS_TOKEN_EXPIRATION,
-  REFRESH_TOKEN_EXPIRATION,
-} from '@config'
+import { JWT_SECRET } from '../config'
 
-export function generateAccessToken(user: any) {
-  return jwt.sign(user, JWT_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRATION })
-}
+const defaultOptions: jwt.SignOptions = { expiresIn: '10s' }
 
-export function generateRefreshToken(user: any) {
-  return jwt.sign(user, JWT_SECRET, { expiresIn: REFRESH_TOKEN_EXPIRATION })
+export class JwtTokenUtils {
+  static generate(payload: any, options: jwt.SignOptions = defaultOptions) {
+    return jwt.sign(payload, JWT_SECRET, options)
+  }
+
+  static verify(token: string, cb: jwt.VerifyCallback) {
+    return jwt.verify(token, JWT_SECRET, cb)
+  }
 }
