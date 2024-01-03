@@ -1,7 +1,7 @@
 import { Request, Response, Router as AuthRouter } from 'express'
 import { JwtTokenUtils } from '../utils/token'
 import { REFRESH_TOKEN_EXPIRATION } from '../config'
-import type { User } from '../lib/definitions'
+import type { User } from '../lib/types/definitions'
 
 const authRouter = AuthRouter()
 

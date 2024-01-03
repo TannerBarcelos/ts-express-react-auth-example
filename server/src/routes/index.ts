@@ -6,7 +6,7 @@ import { authenticateToken as authCheck } from '../middleware/auth'
 const rootRouter = RootRouter()
 
 rootRouter.get('/ping', (req, res) => {
-  res.send('Hello World!')
+  res.json({ message: 'pong' })
 })
 
 rootRouter.use('/auth', authRoutes)
